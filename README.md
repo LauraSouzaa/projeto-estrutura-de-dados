@@ -1,4 +1,4 @@
-# projeto-estrutura-de-dados
+# projeto Sistema de Estoque e Vendas
 
 ## Disciplina
 
