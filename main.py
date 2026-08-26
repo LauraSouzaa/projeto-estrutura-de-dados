@@ -30,11 +30,13 @@ def salvar_dados():
     persistencia.salvar_vendas(fila_vendas)
 
 
-def ler_int(msg, minimo=None):
+def ler_int(msg, minimo=None, maximo=None):
     while True:
         try:
             valor = int(input(msg))
             if minimo is not None and valor < minimo:
+                raise ValueError
+            if maximo is not None and valor>maximo:
                 raise ValueError
             return valor
         except ValueError:
@@ -55,9 +57,12 @@ def ler_float(msg, minimo=None):
 def ler_texto(msg):
     while True:
         valor = input(msg).strip()
-        if valor:
+        if not valor:
+            print("O campo não pode ficar vazio.")
+        elif not valor.replace(" ", "").isalpha():
+            print("Digite apenas letras.")
+        else:
             return valor
-        print("O campo não pode ficar vazio.")
 
 
 def encontrar_cliente(cliente_id):
@@ -151,7 +156,7 @@ def atualizar_estoque():
         print("Produto não encontrado.")
         return
 
-    nova_quantidade = ler_int("Nova quantidade: ", 0)
+    nova_quantidade = ler_int("Nova quantidade: ", 0,10000)
     quantidade_anterior = produto.quantidade
     produto.quantidade = nova_quantidade
     salvar_dados()
@@ -314,9 +319,13 @@ def cliente_que_mais_gastou():
     for venda in vendas:
         gastos[venda.cliente_id] = gastos.get(venda.cliente_id, 0) + venda.total
 
-    cliente_id = max(gastos, key=gastos.get)
-    cliente = encontrar_cliente(cliente_id)
-    print(f"Cliente que mais gastou: {cliente.nome} - R$ {gastos[cliente_id]:.2f}")
+    maior_gasto=max(gastos.values())
+    print("Cliente(s) que mais gastaram:")
+
+    for cliente_id, total in gastos.items():
+        if total==maior_gasto:
+            cliente = encontrar_cliente(cliente_id)
+            print(f"{cliente.nome} - R$ {total:.2f}")
 
 
 def produto_mais_vendido():
