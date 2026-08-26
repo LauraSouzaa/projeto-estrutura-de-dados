@@ -108,5 +108,3 @@ Os principais arquivos são:
 | -------------- | ----------- | ---------- | --------- |
 | Insertion Sort | O(n)        | O(n²)      | O(n²)     |
 | Busca Binária  | O(1)        | O(log n)   | O(log n)  |
-
-> A Busca Binária exige que os dados estejam ordenados. No sistema, os produtos são ordenados antes da busca. Portanto, considerando o processo completo de ordenar e depois buscar, a complexidade é **O(n²)** no pior caso.
