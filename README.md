@@ -1,4 +1,4 @@
-# projeto Sistema de Estoque e Vendas
+# Projeto Sistema de Estoque e Vendas
 
 ## Disciplina
 
